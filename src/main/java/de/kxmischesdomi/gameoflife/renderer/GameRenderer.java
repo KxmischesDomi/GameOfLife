@@ -203,8 +203,8 @@ public class GameRenderer extends PApplet {
 
 	@Override
 	public void mouseWheel(MouseEvent event) {
-		float diff = event.getCount() * (zoom / 10);
 		// make zoom greater the further out
+		float diff = event.getCount() * (zoom / 10);
 		float newZoom = zoom + diff;
 		if (newZoom < 10 || newZoom > 5000) return;
 		zoom = newZoom;
