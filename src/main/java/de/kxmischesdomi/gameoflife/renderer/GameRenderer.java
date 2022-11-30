@@ -210,8 +210,19 @@ public class GameRenderer extends PApplet {
 		float newZoom = zoom + diff;
 		if (newZoom < 10 || newZoom > 5000) return;
 		zoom = newZoom;
-		posY += (mouseY - posY) * diff / zoom;
-		posX += (mouseX - posX) * diff / zoom;
+
+		int zoomPosX = mouseX;
+		int zoomPosY = mouseY;
+
+		if (diff > 1) {
+			zoomPosX = 1920 / 2;
+			zoomPosY = 1080 / 2;
+		}
+
+
+		posX += (zoomPosX - posX) * diff / zoom;
+		posY += (zoomPosY - posY) * diff / zoom;
+
 
 	}
 
