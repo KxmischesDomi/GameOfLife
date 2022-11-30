@@ -88,6 +88,9 @@ public class GameRenderer extends PApplet {
 	}
 
 	private void drawGrid() {
+		int alpha = 255 - (int) (zoom * 2.5f);
+		if (alpha <= 0) return;
+
 		pushStyle();
 		int cellwidth = (int) Math.ceil(1920f / zoom);
 		int verticalCells = (int) Math.ceil(1080f / cellwidth);
@@ -97,9 +100,8 @@ public class GameRenderer extends PApplet {
 		float yOffset = posY % cellwidth;
 
 		strokeWeight(1);
-		stroke(255, 255, 255, 255 - (int) (zoom * 2.5f));
+		stroke(255, 255, 255, alpha);
 
-		// TODO: STOP RENDERING HERE IF ALPHA IS 0
 		for (int x = 0; x <= horizontalCells; x++) {
 			// draw vertical lines
 			float xPos = x * cellwidth + xOffset;
