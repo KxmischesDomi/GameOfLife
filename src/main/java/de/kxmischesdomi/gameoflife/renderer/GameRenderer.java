@@ -99,6 +99,7 @@ public class GameRenderer extends PApplet {
 		strokeWeight(1);
 		stroke(255, 255, 255, 255 - (int) (zoom * 2.5f));
 
+		// TODO: STOP RENDERING HERE IF ALPHA IS 0
 		for (int x = 0; x <= horizontalCells; x++) {
 			// draw vertical lines
 			float xPos = x * cellwidth + xOffset;
