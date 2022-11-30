@@ -1,5 +1,5 @@
 # GameOfLife
- Convays Game of Life implementation in Java
+ Conway's Game of Life implementation in Java
 
 ## Dependencies
 * Java 19
