@@ -28,7 +28,6 @@ public class PauseButton extends BooleanButton {
 		super.setValue(value);
 		ConwayComputing computing = GameOfLife.getInstance().getComputing();
 		computing.running = value;
-		computing.lastComputingMillis = System.currentTimeMillis();
 	}
 
 }
