@@ -37,7 +37,7 @@ public class GameRenderer extends PApplet {
 
 		int buttonCount = 3;
 		int buttonMargin = 10;
-		int buttonWidth = 200;
+		int buttonWidth = 400;
 		int buttonHeight = 200;
 
 		int middleX = 1920 / 2;

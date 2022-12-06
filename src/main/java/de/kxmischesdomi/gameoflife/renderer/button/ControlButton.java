@@ -57,7 +57,7 @@ public abstract class ControlButton implements Renderable, Interactable {
 		applet.fill(0xFFFFFFFF);
 		applet.textSize(80);
 		applet.textAlign(GameRenderer.CENTER, GameRenderer.CENTER);
-		applet.text(getText(), x + width / 2F, y + height / 2F);
+		applet.text(getText(), x + width / 2F, y + height / 2F - height / 10F);
 		applet.popStyle();
 	}
 
