@@ -10,7 +10,7 @@ import java.text.DecimalFormat;
  */
 public class SpeedButton extends IntegerButton {
 
-    public static final float[] speeds = { 1, 1.5f, 2, 3, 5, 0.5f };
+    public static final float[] speeds = { 1, 1.5f, 2, 3, 5, 10, 0.5f };
 
     public SpeedButton(int x, int y, int width, int height) {
         super(x, y, width, height, 0, speeds.length - 1, 0);
