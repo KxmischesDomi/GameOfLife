@@ -1,10 +1,10 @@
 package de.kxmischesdomi.gameoflife.renderer;
 
+import de.kxmischesdomi.gameoflife.ConwayComputing;
 import de.kxmischesdomi.gameoflife.GameOfLife;
 import de.kxmischesdomi.gameoflife.data.CellData;
+import de.kxmischesdomi.gameoflife.renderer.button.BooleanButton;
 import de.kxmischesdomi.gameoflife.renderer.button.ClearButton;
-import de.kxmischesdomi.gameoflife.renderer.button.ControlButton;
-import de.kxmischesdomi.gameoflife.renderer.button.PauseButton;
 import de.kxmischesdomi.gameoflife.renderer.button.SpeedButton;
 import processing.core.PApplet;
 import processing.event.KeyEvent;
@@ -31,11 +31,13 @@ public class GameRenderer extends PApplet {
 
 	float mouseHoldX, mouseHoldY;
 
+	boolean debug;
+
 	@Override
 	public void settings() {
 		size(1920 / 3, 1080 / 3);
 
-		int buttonCount = 3;
+		int buttonCount = 4;
 		int buttonMargin = 10;
 		int buttonWidth = 400;
 		int buttonHeight = 200;
@@ -44,7 +46,11 @@ public class GameRenderer extends PApplet {
 		int startX = middleX - (buttonCount * buttonWidth + (buttonCount - 1) * buttonMargin) / 2;
 		int buttonDistance = buttonWidth + buttonMargin;
 
-		PauseButton pauseButton = new PauseButton(startX, 0, buttonWidth, buttonHeight);
+		BooleanButton pauseButton = new BooleanButton(startX, 0, buttonWidth, buttonHeight, false, "Play", value -> {
+			ConwayComputing computing = GameOfLife.getInstance().getComputing();
+			computing.running = value;
+			return value ? "Pause" : "Start";
+		});
 		renderables.add(pauseButton);
 		interactables.add(pauseButton);
 
@@ -55,6 +61,13 @@ public class GameRenderer extends PApplet {
 		ClearButton clearButton = new ClearButton(startX + buttonDistance * 2, 0, buttonWidth, buttonHeight);
 		renderables.add(clearButton);
 		interactables.add(clearButton);
+
+		BooleanButton debugButton = new BooleanButton(startX + buttonDistance * 3, 0, buttonWidth, buttonHeight, false, "Debug", value -> {
+			this.debug = value;
+			return "Debug";
+		});
+		renderables.add(debugButton);
+		interactables.add(debugButton);
 	}
 
 	@Override
@@ -125,7 +138,9 @@ public class GameRenderer extends PApplet {
 		for (CellData cell : cells) {
 			drawCell(cell.getX(), cell.getY());
 		}
-		debug();
+		if (debug) {
+			debug();
+		}
 
 	}
 
@@ -219,11 +234,8 @@ public class GameRenderer extends PApplet {
 			zoomPosY = 1080 / 2;
 		}
 
-
 		posX += (zoomPosX - posX) * diff / zoom;
 		posY += (zoomPosY - posY) * diff / zoom;
-
-
 	}
 
 	@Override
